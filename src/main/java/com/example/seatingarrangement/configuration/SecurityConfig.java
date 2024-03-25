@@ -27,20 +27,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-   private final JWTAuthFilter jwtAuthFilter;
-   private final RegistrationRepoService registrationRepoService;
+    private final JWTAuthFilter jwtAuthFilter;
+    private final RegistrationRepoService registrationRepoService;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth->{
-                    auth.requestMatchers("/seating/register","/seating/login").permitAll().anyRequest().authenticated();
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/seating/register", "/seating/login").permitAll().anyRequest().authenticated();
                 })
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -51,17 +51,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService companyDetails(){
+    public UserDetailsService companyDetails() {
         return new CompanyInfoDetailService(registrationRepoService);
     }
 
-
-
-
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
 
-        DaoAuthenticationProvider daoAuthenticationProvider= new DaoAuthenticationProvider();
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(companyDetails());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;

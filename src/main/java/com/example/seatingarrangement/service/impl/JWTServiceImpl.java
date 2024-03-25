@@ -6,7 +6,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,23 +18,23 @@ import java.util.function.Function;
 
 
 @Service
-@Slf4j
 public class JWTServiceImpl implements JWTService {
 
     public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
     @Override
     public String extractUsername(String token) {
-        return extractClaim(token,Claims::getSubject);
+//        return extractClaim(token,Claims::getSubject);
+        return extractAllClaims(token).getSubject();
     }
     @Override
     public Date extractExpiration(String token) {
-        return extractClaim(token,Claims::getExpiration);
+//        return extractClaim(token,Claims::getExpiration);
+        return extractAllClaims(token).getExpiration();
     }
     @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims= extractAllClaims(token);
-        log.info(claims.toString());
         return null;
     }
 
@@ -91,10 +90,15 @@ public class JWTServiceImpl implements JWTService {
     @Override
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username= extractUsername(token);
-        return(username.equals(userDetails.getUsername()) && isTokenExpired(token));
+        System.out.println(username.equals(userDetails.getUsername()) );
+        System.out.println(isTokenExpired(token));
+        return(username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
+        System.out.println(extractExpiration(token));
+        System.out.println(new Date());
+        System.out.println(extractExpiration(token).before(new Date()));
         return extractExpiration(token).before(new Date());
     }
 

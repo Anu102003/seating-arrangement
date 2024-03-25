@@ -66,7 +66,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             Session session = new Session();
             session.setSessionId(sessionId);
             session.setCreateDate(LocalDateTime.now());
-            session.setLastModifiedDate(LocalDateTime.now());
+            session.setLastmodifiedDate(LocalDateTime.now());
             session.setCompanyDetails(companyDetails.get());
             sessionRepoService.save(session);
             var token=jwtService.generateToken(companyDetails.get().getCompanyName(),sessionId);

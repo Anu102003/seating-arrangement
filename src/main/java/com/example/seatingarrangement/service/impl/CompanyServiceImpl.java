@@ -28,7 +28,8 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepoService companyRepoService;
     @Autowired
     private CompanyRepository companyRepository;
-    public ResponseEntity<ResponseDto> add(CompanyDto companyDto)  {
+
+    public ResponseEntity<ResponseDto> add(CompanyDto companyDto) {
         Company company = new Company();
         company.setCompanyId(UUID.randomUUID().toString());
         company.setCompanyName(companyDto.getCompanyName());
@@ -42,9 +43,8 @@ public class CompanyServiceImpl implements CompanyService {
             defaultLayoutList.add(defaultLayout);
         }
         company.setCompanyLayout(defaultLayoutList);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(companyRepository.save(company),"company saved",HttpStatus.OK));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(companyRepository.save(company), "company saved", HttpStatus.OK));
     }
-
 
 
     private int availableSpacesCount(int[][] layOut) {
@@ -68,53 +68,50 @@ public class CompanyServiceImpl implements CompanyService {
 
 
     public ResponseEntity<ResponseDto> updateLayout(LayoutDto layoutDto) throws BadRequestException {
-        LayoutDto responseLayoutDto=new LayoutDto();
-        Company company=isValid(layoutDto);
-        if(layoutDto.getLayoutId()==null){
-            Company.DefaultLayout defaultLayout=new Company.DefaultLayout();
-            defaultLayout.setCompanyLayout(layoutDto.getDefaultLayout());
-            defaultLayout.setLayoutId(UUID.randomUUID().toString());
-            defaultLayout.setTotalSpace(availableSpacesCount(layoutDto.getDefaultLayout()));
-            modelMapper.map(defaultLayout,responseLayoutDto);
-            company.getCompanyLayout().add(defaultLayout);
-        } else if (layoutDto.getDefaultLayout()==null) {
-            int ind=0;
-            for (Company.DefaultLayout defaultLayout:company.getCompanyLayout()){
-                if(defaultLayout.getLayoutId().equals(layoutDto.getLayoutId())){
+        LayoutDto responseLayoutDto = new LayoutDto();
+        Company company = isValid(layoutDto);
+        if (layoutDto.getDefaultLayout() == null) {
+            int ind = 0;
+            for (Company.DefaultLayout defaultLayout : company.getCompanyLayout()) {
+                if (defaultLayout.getLayoutId().equals(layoutDto.getLayoutId())) {
                     company.getCompanyLayout().remove(ind);
                     break;
                 }
                 ind++;
             }
             company.setCompanyLayout(company.getCompanyLayout());
-        }
-        else{
-            int ind=0;
-            for (Company.DefaultLayout defaultLayout:company.getCompanyLayout()){
-                if(defaultLayout.getLayoutId().equals(layoutDto.getLayoutId())){
-                    defaultLayout.setCompanyLayout(layoutDto.getDefaultLayout());
-                    defaultLayout.setTotalSpace(availableSpacesCount(layoutDto.getDefaultLayout()));
-                    company.getCompanyLayout().set(ind,defaultLayout);
-                    modelMapper.map(defaultLayout,responseLayoutDto);
-                    break;
+        } else {
+            Company.DefaultLayout defaultLayout = new Company.DefaultLayout();
+            defaultLayout.setCompanyLayout(layoutDto.getDefaultLayout());
+            defaultLayout.setTotalSpace(availableSpacesCount(layoutDto.getDefaultLayout()));
+            defaultLayout.setLayoutId(UUID.randomUUID().toString());
+            modelMapper.map(defaultLayout, responseLayoutDto);
+            if (layoutDto.getLayoutId() != null) {
+                int ind = 0;
+                for (Company.DefaultLayout layout : company.getCompanyLayout()) {
+                    if (layout.getLayoutId().equals(layoutDto.getLayoutId())) {
+                        layout.setChanged(true);
+                        company.getCompanyLayout().set(ind,layout);
+                        break;
+                    }
+                    ind++;
                 }
-                ind++;
             }
+            company.getCompanyLayout().add(defaultLayout);
         }
-        responseLayoutDto.setCompanyName(layoutDto.getCompanyName());
-        companyRepository.save(company);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(responseLayoutDto,"updates done",HttpStatus.OK));
+            responseLayoutDto.setCompanyName(layoutDto.getCompanyName());
+            companyRepository.save(company);
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(responseLayoutDto, "updates done", HttpStatus.OK));
 
+        }
+        Company isValid (LayoutDto layoutDto) throws BadRequestException {
+            Optional<Company> company = companyRepository.findByCompanyName(layoutDto.getCompanyName());
+            if (company.isEmpty())
+                throw new BadRequestException("company not present");
+            if (layoutDto.getLayoutId() == null && layoutDto.getDefaultLayout() == null)
+                throw new BadRequestException("data not present");
+            if (layoutDto.getLayoutId() != null && companyRepoService.findByLayoutId(layoutDto.getLayoutId()) == null)
+                throw new BadRequestException("layoutId not present");
+            return company.get();
+        }
     }
-    Company isValid(LayoutDto layoutDto) throws BadRequestException {
-        Optional<Company> company=companyRepository.findByCompanyName(layoutDto.getCompanyName());
-        if(company.isEmpty())
-            throw new BadRequestException("company not present");
-        if(layoutDto.getLayoutId()==null && layoutDto.getDefaultLayout()==null)
-            throw new BadRequestException("data not present");
-        if(layoutDto.getLayoutId()!=null&&companyRepoService.findByLayoutId(layoutDto.getLayoutId())==null)
-            throw new BadRequestException("layoutId not present");
-        return company.get();
-    }
-
-}

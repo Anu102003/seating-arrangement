@@ -30,8 +30,8 @@ public class Company {
     {
         @UuidGenerator
         private String layoutId;
+        private boolean isChanged;
         private int[][] companyLayout;
-
         private int totalSpace;
     }
 

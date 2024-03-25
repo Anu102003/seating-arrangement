@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-@SpringBootApplication
+@SpringBootApplication()
 @EnableJpaAuditing
-
+@EnableWebSecurity
 public class SeatingArrangementApplication {
 
 	public static void main(String[] args) {
