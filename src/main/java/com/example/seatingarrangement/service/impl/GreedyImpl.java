@@ -28,8 +28,7 @@ public class GreedyImpl extends AllocationAbstract {
 
     private final Map<String, Character> tempTeamList1 = new LinkedHashMap<>();
     private final List<String> midValues = new ArrayList<>();
-//    @Autowired
-//    AllocationRepository allocationRepository;
+
     private int[][] arr;
     private Integer pref = 0;
     private int[][] dp;
@@ -186,7 +185,7 @@ public class GreedyImpl extends AllocationAbstract {
         String layoutId = allocationDto.getLayoutId();
         pref = allocationDto.getPreference();
         GetLayoutDto getLayoutDto = companyRepoService.findByLayoutId(layoutId);
-    getLayoutDto.setAvailableSpaces(20);
+//    getLayoutDto.setAvailableSpaces(20);
         LinkedHashMap<String, Character> teamList = new LinkedHashMap<>();
         int spacesTobeAllocated = 0;
         HashMap<String, Integer> map = allocationDto.getToBeAllocated();  //ch
@@ -208,18 +207,18 @@ public class GreedyImpl extends AllocationAbstract {
             Type type;
             if(teamObjectDto.getPreference()!=3){
                 if(teamObjectDto.getPreference()==1) {
-                    type= Type.ASC;
+                    type= Type.DESC;
                 }
                 else
-                    type= Type.DESC;
-                Allocation allocatedLayout=allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(teamObjectDto.getLayoutId(),type,teamObjectDto.getAlgorithmPref());
+                    type= Type.ASC;
+                Optional<Allocation> allocatedLayout=allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(teamObjectDto.getLayoutId(),type,teamObjectDto.getAlgorithmPref());
                 System.out.println("allocatedLayout"+"   "+allocatedLayout);
-                if (allocatedLayout!=null) {
+                if (allocatedLayout.isPresent()) {
                     UserReferenceDto userReferenceDto=new UserReferenceDto();
 
-                    userReferenceDto.setAllocation(allocatedLayout.getAllocationLayout());
+                    userReferenceDto.setAllocation(allocatedLayout.get().getAllocationLayout());
 
-                    Optional<Team> team3=teamRepoService.findByTeamId(allocatedLayout.getTeamId());
+                    Optional<Team> team3=teamRepoService.findByTeamId(allocatedLayout.get().getTeamId());
 
                     ArrayList<UserReferenceDto.TeamReference> teamReferences=new ArrayList<>();
 
@@ -261,6 +260,8 @@ public class GreedyImpl extends AllocationAbstract {
                     tempList.put(name, lastId);
                     teamInfo.setTeamCode("" + lastId);
                 }
+                if(tempList.size()==1)
+                    teamList = tempList;
                 teamInfo.setTeamName(name);
                 teamInfo.setTeamCount(map.get(name));
                 teamInfos.add(teamInfo);
@@ -282,9 +283,9 @@ public class GreedyImpl extends AllocationAbstract {
         Allocation allocation = new Allocation();
         allocation.setDefaultLayoutId(layoutId);
         if (pref == 1)
-            allocation.setAllocationType(Type.ASC);
-        else if (pref == 2)
             allocation.setAllocationType(Type.DESC);
+        else if (pref == 2)
+            allocation.setAllocationType(Type.ASC);
         else
             allocation.setAllocationType(Type.RANDOM);
         allocation.setAllocationLayout(teamNames);

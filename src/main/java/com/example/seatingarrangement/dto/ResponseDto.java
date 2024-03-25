@@ -1,6 +1,7 @@
 package com.example.seatingarrangement.dto;
 
 
+import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.net.http.HttpClient;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ResponseDto {
 
   private Object Data;

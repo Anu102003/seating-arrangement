@@ -7,6 +7,7 @@ import com.example.seatingarrangement.entity.Company;
 import com.example.seatingarrangement.repository.CompanyRepository;
 import com.example.seatingarrangement.repository.service.CompanyRepoService;
 import com.example.seatingarrangement.service.CompanyService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@Slf4j
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
@@ -58,8 +60,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public ResponseEntity<ResponseDto> getAllLayOut(String companyName) {
 
+        log.info(companyName);
         Optional<Company> company = companyRepository.findByCompanyName(companyName);
-
         //queryChange
         return company.map(out -> ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(out, "layout obtained", HttpStatus.OK))).orElseGet(() -> ResponseEntity.status(HttpStatus.OK).body(new ResponseDto("", "Company not found", HttpStatus.OK)));
     }
