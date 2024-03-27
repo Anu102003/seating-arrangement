@@ -1,11 +1,16 @@
 package com.example.seatingarrangement.api;
 
 import com.example.seatingarrangement.constants.ApiConstant;
-import com.example.seatingarrangement.dto.*;
-import com.example.seatingarrangement.entity.CompanyDetails;
+import com.example.seatingarrangement.dto.LoginRequestDTO;
+import com.example.seatingarrangement.dto.ResponseDto;
+import com.example.seatingarrangement.dto.SignUpRequestDTO;
+import com.example.seatingarrangement.dto.TokenDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @CrossOrigin()
 @RequestMapping(ApiConstant.BASIC_API_URL)

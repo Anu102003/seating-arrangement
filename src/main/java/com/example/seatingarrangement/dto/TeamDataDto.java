@@ -4,7 +4,6 @@ import com.example.seatingarrangement.entity.TeamInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.amqp.RabbitRetryTemplateCustomizer;
 
 import java.util.ArrayList;
 

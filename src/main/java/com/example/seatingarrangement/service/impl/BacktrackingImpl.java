@@ -135,7 +135,6 @@ public class BacktrackingImpl extends AllocationAbstract {
     }
 
     static boolean findSteps(int x, int y, int resultx, int resulty, int steps, String teamCode) {
-//        log.
         if (x == resultx && y == resulty) {
             steps += 1;
             if (steps < minSteps)
@@ -156,11 +155,13 @@ public class BacktrackingImpl extends AllocationAbstract {
                 steps += 2;
             if (findSteps(x, y + 1, resultx, resulty, steps + 1, teamCode))
                 return true;
-            if (findSteps(x - 1, y, resultx, resulty, steps + 1, teamCode))
-                return true;
             if (findSteps(x + 1, y, resultx, resulty, steps + 1, teamCode))
                 return true;
-            return findSteps(x, y - 1, resultx, resulty, steps + 1, teamCode);
+            if (findSteps(x - 1, y, resultx, resulty, steps + 1, teamCode)) {
+                return true;
+            }
+            if (findSteps(x, y - 1, resultx, resulty, steps + 1, teamCode))
+                return true;
         }
         return false;
     }
@@ -207,7 +208,7 @@ public class BacktrackingImpl extends AllocationAbstract {
             Type type;
             teamList = teamRepoService.findByTeamId(teamId).get().getTeams();
             if (teamObjectDto.getPreference() != 3) {
-                if (teamObjectDto.getPreference() == 1) {
+                if (teamObjectDto.getPreference() == 2) {
                     type = Type.ASC;
                 } else
                     type = Type.DESC;
@@ -252,19 +253,30 @@ public class BacktrackingImpl extends AllocationAbstract {
         allocation.setTeamId(teamId);
         allocation.setDefaultLayoutId(teamObjectDto.getLayoutId());
         allocation.setAlgorithmPref(teamObjectDto.getAlgorithmPref());
-        if (teamObjectDto.getPreference() == 1) {
+        System.out.println(teamObjectDto);
+        if (teamObjectDto.getPreference() == 2) {
             allocation.setAllocationType(Type.ASC);
-            teamList.sort(Comparator.comparing(TeamInfo::getTeamCount).reversed());
-        } else if (teamObjectDto.getPreference() == 2) {
-            allocation.setAllocationType(Type.DESC);
             teamList.sort(Comparator.comparing(TeamInfo::getTeamCount));
+        } else if (teamObjectDto.getPreference() == 1) {
+            allocation.setAllocationType(Type.DESC);
+            teamList.sort(Comparator.comparing(TeamInfo::getTeamCount).reversed());
         } else {
             allocation.setAllocationType(Type.RANDOM);
             Collections.shuffle(teamList);
-//            teamList = new HashSet<>(teamList).stream().toList();
         }
         log.info(teamList.toString());
         int[][] defaultLayout = getLayoutDto.getLayout();
+        if(getLayoutDto.getCompanyName().equalsIgnoreCase("divum")) {
+            for(int i=0;i<defaultLayout.length;i++){
+                for (int j=0;j<defaultLayout[0].length;j++){
+                    if(j==14)
+                        defaultLayout[i][j]=-1;
+                    else if (i==11&&j<=14)
+                        defaultLayout[i][j]=-1;
+                }
+            }
+            System.out.println(Arrays.deepToString(defaultLayout));
+        }
         arrangement = new String[defaultLayout.length][defaultLayout[0].length];
         tempLayout = defaultLayout;
         findArrangement(teamList);

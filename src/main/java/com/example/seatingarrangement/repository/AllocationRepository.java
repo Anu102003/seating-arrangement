@@ -3,7 +3,6 @@ package com.example.seatingarrangement.repository;
 import com.example.seatingarrangement.dto.GetAllocationDto;
 import com.example.seatingarrangement.entity.Allocation;
 import com.example.seatingarrangement.enums.Type;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

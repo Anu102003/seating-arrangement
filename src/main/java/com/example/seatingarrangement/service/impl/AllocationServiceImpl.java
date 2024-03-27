@@ -54,13 +54,13 @@ public class AllocationServiceImpl implements AllocationService {
         if (teamObjectDto.getAlgorithmPref() == 1) {
             GreedyImpl greedyImpl = new GreedyImpl(teamRepoService, companyRepoService, teamRepository, allocationRepoService, allocationRepository, modelMapper);
 
-            System.out.println("h       i          " + companyRepository.findByLayoutId(teamObjectDto.getLayoutId()));
+            log.info("h       i          " + companyRepository.findByLayoutId(teamObjectDto.getLayoutId()));
             return greedyImpl.createAllocation(teamObjectDto);
 
         } else if (teamObjectDto.getAlgorithmPref() == 2) {
             BacktrackingImpl backtracking = new BacktrackingImpl(teamRepoService, companyRepoService, teamRepository, allocationRepoService, allocationRepository, modelMapper);
 
-            System.out.println("BTTTTTTTTTT");
+            log.info("BTTTTTTTTTT");
             return backtracking.createAllocation(teamObjectDto);
         }
 
@@ -108,7 +108,7 @@ public class AllocationServiceImpl implements AllocationService {
         Optional<List<GetAllocationDto>> getAllocationDto = allocationRepoService.findByDefaultLayoutId(layoutId);  //dto to be created
 
         if (getAllocationDto.isPresent()) {
-            System.out.println(getAllocationDto.get().stream().toString() + " values");
+            log.info(getAllocationDto.get().stream().toString() + " values");
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(getAllocationDto.get(), Constant.ALLOCATION_NOT_RETRIEVED, HttpStatus.OK));
         } else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDto("", Constant.ALLOCATION_NOT_FOUND, HttpStatus.OK));

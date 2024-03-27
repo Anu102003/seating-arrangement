@@ -5,10 +5,7 @@ import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.i18n.SimpleTimeZoneAwareLocaleContext;
 import org.springframework.http.HttpStatus;
-
-import java.net.http.HttpClient;
 
 @Data
 @AllArgsConstructor
@@ -16,9 +13,9 @@ import java.net.http.HttpClient;
 
 public class ResponseDto {
 
-    private Object Data;
+    private Object data;
 
-    private String Message;
+    private String message;
 
     private HttpStatus httpStatus;
 

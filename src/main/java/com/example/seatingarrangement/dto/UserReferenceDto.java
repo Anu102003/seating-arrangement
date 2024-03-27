@@ -22,7 +22,7 @@ public class UserReferenceDto {
     public static class TeamReference {
         private String name;
 
-        private String Key;
+        private String key;
 
         private Integer count;
     }

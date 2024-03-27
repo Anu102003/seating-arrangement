@@ -11,6 +11,7 @@ import com.example.seatingarrangement.service.JWTService;
 import com.example.seatingarrangement.service.RegistrationService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
 
@@ -101,11 +103,11 @@ public class RegistrationServiceImpl implements RegistrationService {
             String accessToken = tokenDto.getAccessToken();
             Claims claims = jwtService.extractAllClaims(accessToken);
             claims.setExpiration(new Date());
-            System.out.println(claims);
+            log.info(String.valueOf(claims));
             String sessionId = claims.get("sessionId", String.class);
             Optional<Session> sessionData = sessionRepoService.findBySessionId(sessionId);
             Session session = sessionData.get();
-            System.out.println(session.getLogoutTime());
+            log.info(String.valueOf(session.getLogoutTime()));
             if (session.getLogoutTime() != null) {
                 throw new AlreadyLogOutException(Constant.ALREADY_LOGGED_OUT);
             }

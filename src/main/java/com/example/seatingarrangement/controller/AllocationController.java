@@ -6,6 +6,7 @@ import com.example.seatingarrangement.dto.CsvOutputDto;
 import com.example.seatingarrangement.dto.ResponseDto;
 import com.example.seatingarrangement.dto.TeamObjectDto;
 import com.example.seatingarrangement.service.AllocationService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.io.InputStream;
 
 
 @RestController
+@Slf4j
 public class AllocationController implements AllocationApi {
 
     @Autowired
@@ -38,7 +40,7 @@ public class AllocationController implements AllocationApi {
 
     @Override
     public ResponseEntity<ResponseDto> convertCsvFile(MultipartFile file) throws IOException {
-        System.out.println(file);
+        log.info(String.valueOf(file));
         InputStream inputStream = file.getInputStream();
         CsvOutputDto csvOutputDto = allocationService.convertCsvFile(inputStream);
         if (csvOutputDto.isFlag())

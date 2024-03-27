@@ -1,9 +1,7 @@
 package com.example.seatingarrangement.repository;
 
 import com.example.seatingarrangement.dto.TeamDto;
-import com.example.seatingarrangement.dto.TeamObjectDto;
 import com.example.seatingarrangement.entity.Team;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

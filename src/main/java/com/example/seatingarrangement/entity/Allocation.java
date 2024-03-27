@@ -10,7 +10,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.swing.*;
 import java.util.Date;
 
 
@@ -33,30 +32,3 @@ public class Allocation {
     private String[][] allocationLayout;
 }
 
-//{
-//        "companyName":"abc",
-//        "row":7,
-//        "column":10,
-//        "layOut":[
-//        [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-//        [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-//        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//        [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-//        [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-//        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//        [1, 1, 0, 1, 1, 1, 1, 0, 1, 1]
-//        ]
-//        }
-
-
-//{
-//        "companyName":"abc",
-//        "toBeAllocated":
-//        {
-//        "ac":7,
-//        "cde":10,
-//        "wer":3,
-//        "gfd":6,
-//        "aed":10
-//        }
-//        }

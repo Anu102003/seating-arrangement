@@ -17,6 +17,6 @@ public interface CompanyRepository extends MongoRepository<Company, String> {
     @Aggregation(pipeline = {"{'$unwind': {'path': '$companyLayout'}}",
             "{'$match': {'companyLayout.layoutId': ?0}}",
             "{'$addFields': {'availableSpaces': '$companyLayout.totalSpace','layout': '$companyLayout.companyLayout'}}",
-            "{'$project': {'layout':1,'availableSpaces': 1,'_id': 0}}"})
+            "{'$project': {'layout':1,'availableSpaces': 1,'_id': 0,'companyName': 1}}"})
     GetLayoutDto findByLayoutId(String layoutId);
 }

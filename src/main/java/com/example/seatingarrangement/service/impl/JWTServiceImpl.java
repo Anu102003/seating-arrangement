@@ -13,7 +13,6 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 
 
@@ -91,15 +90,10 @@ public class JWTServiceImpl implements JWTService {
     @Override
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        System.out.println(username.equals(userDetails.getUsername()));
-        System.out.println(isTokenExpired(token));
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
-        System.out.println(extractExpiration(token));
-        System.out.println(new Date());
-        System.out.println(extractExpiration(token).before(new Date()));
         return extractExpiration(token).before(new Date());
     }
 

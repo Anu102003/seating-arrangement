@@ -16,12 +16,14 @@ import java.io.IOException;
 @CrossOrigin
 public interface AllocationApi {
 
-    @PostMapping(ApiConstant.ADD_ALLOCATION) //to be
+    @PostMapping(ApiConstant.ADD_ALLOCATION)
+        //to be
     ResponseEntity<ResponseDto> addAllocation(@RequestBody TeamObjectDto teamObjectDto) throws BadRequestException;
 
-    @PostMapping(ApiConstant.CSV_FILE)  //checked
+    @PostMapping(ApiConstant.CSV_FILE)
+        //checked
     ResponseEntity<ResponseDto> convertCsvFile(@RequestBody MultipartFile file) throws IOException;
 
     @GetMapping(ApiConstant.LAYOUT_ALLOCATION)
-    ResponseEntity<ResponseDto> getAllocations(@PathVariable String layoutId);
+    ResponseEntity<ResponseDto> getAllocations(@PathVariable("layout_id") String layoutId);
 }

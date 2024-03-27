@@ -1,9 +1,8 @@
-package com.example.seatingarrangement.Filter;
+package com.example.seatingarrangement.filter;
 
 import com.example.seatingarrangement.configuration.CompanyInfoDetailService;
 import com.example.seatingarrangement.constants.Constant;
 import com.example.seatingarrangement.entity.Session;
-import com.example.seatingarrangement.repository.service.RegistrationRepoService;
 import com.example.seatingarrangement.repository.service.SessionRepoService;
 import com.example.seatingarrangement.service.JWTService;
 import io.jsonwebtoken.Claims;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Optional;
 
 @Service

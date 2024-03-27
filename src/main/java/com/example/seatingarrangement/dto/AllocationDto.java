@@ -12,7 +12,7 @@ import java.util.HashMap;
 @Data
 public class AllocationDto {
 
-    private String LayoutId;
+    private String layoutId;
     private HashMap<String, Integer> toBeAllocated;
     private Integer preference;
 

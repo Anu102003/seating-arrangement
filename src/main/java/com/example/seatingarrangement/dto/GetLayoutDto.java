@@ -13,4 +13,5 @@ public class GetLayoutDto {
     private int[][] layout;
 
     private int availableSpaces;
+    private String companyName;
 }
