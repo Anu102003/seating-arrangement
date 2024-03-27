@@ -1,7 +1,6 @@
 package com.example.seatingarrangement.configuration;
 
 import com.example.seatingarrangement.Filter.JWTAuthFilter;
-import com.example.seatingarrangement.repository.RegistrationRepo;
 import com.example.seatingarrangement.repository.service.RegistrationRepoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +39,7 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/seating/register", "/seating/login").permitAll().anyRequest().authenticated();
+                    auth.requestMatchers("/seating/register", "/seating/login", "/seating/logout").permitAll().anyRequest().authenticated();
                 })
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -1,5 +1,6 @@
 package com.example.seatingarrangement.service.impl;
 
+import com.example.seatingarrangement.constants.Constant;
 import com.example.seatingarrangement.dto.*;
 import com.example.seatingarrangement.entity.*;
 import com.example.seatingarrangement.repository.AllocationRepository;
@@ -108,9 +109,9 @@ public class AllocationServiceImpl implements AllocationService {
 
         if (getAllocationDto.isPresent()) {
             System.out.println(getAllocationDto.get().stream().toString() + " values");
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(getAllocationDto.get(), "allocation retrieved", HttpStatus.OK));
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(getAllocationDto.get(), Constant.ALLOCATION_NOT_RETRIEVED, HttpStatus.OK));
         } else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDto("", " no allocation for the given id", HttpStatus.OK));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDto("", Constant.ALLOCATION_NOT_FOUND, HttpStatus.OK));
 
     }
 }

@@ -8,9 +8,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface SessionRepo extends JpaRepository<Session,Integer> {
+public interface SessionRepo extends JpaRepository<Session, Integer> {
     Optional<Session> findBySessionId(String sessionId);
 
 
-//   Optional<Session> findBysessionId(String sessionId);
 }

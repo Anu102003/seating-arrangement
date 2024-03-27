@@ -14,6 +14,7 @@ public class CompanyRepoServiceImpl implements CompanyRepoService {
 
     @Autowired
     private CompanyRepository companyRepository;
+
     @Override
     public void insert(Company company) {
         companyRepository.save(company);

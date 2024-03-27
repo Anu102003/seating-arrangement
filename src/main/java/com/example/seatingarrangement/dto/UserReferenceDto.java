@@ -19,7 +19,7 @@ public class UserReferenceDto {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static  class  TeamReference{
+    public static class TeamReference {
         private String name;
 
         private String Key;

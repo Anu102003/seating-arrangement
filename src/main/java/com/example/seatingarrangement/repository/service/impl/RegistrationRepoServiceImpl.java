@@ -13,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RegistrationRepoServiceImpl implements RegistrationRepoService {
     private final RegistrationRepo registrationRepo;
+
     @Override
     public CompanyDetails save(CompanyDetails companyDetails) {
         return registrationRepo.save(companyDetails);
@@ -30,10 +31,8 @@ public class RegistrationRepoServiceImpl implements RegistrationRepoService {
 
     @Override
     public Optional<CompanyDetails> findByCompanyNameOrEmail(String companyName, String email) {
-        return registrationRepo.findByCompanyNameOrEmail(companyName,email);
+        return registrationRepo.findByCompanyNameOrEmail(companyName, email);
     }
-
-
 
 
 }

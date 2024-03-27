@@ -18,7 +18,7 @@ import java.util.Map;
 @Document(collection = "Company")
 public class Company {
 
- @Id
+    @Id
     private String companyId;
     private String companyName;
     private List<DefaultLayout> companyLayout;
@@ -26,8 +26,7 @@ public class Company {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class DefaultLayout
-    {
+    public static class DefaultLayout {
         @UuidGenerator
         private String layoutId;
         private boolean isChanged;

@@ -16,5 +16,6 @@ public interface AllocationService {
     ResponseEntity<ResponseDto> addAllocation(TeamObjectDto teamObjectDto) throws BadRequestException;
 
     CsvOutputDto convertCsvFile(InputStream inputStream) throws IOException;
+
     ResponseEntity<ResponseDto> getAllocations(String companyName);
 }

@@ -16,9 +16,10 @@ public class TeamRepoServiceImpl implements TeamRepoService {
 
     @Autowired
     private TeamRepository teamRepository;
+
     @Override
     public Team findTeamsByTeamInfo(List<TeamDto> teamInfoList, int size) {
-        return teamRepository.findTeamsByTeamInfo(teamInfoList,size);
+        return teamRepository.findTeamsByTeamInfo(teamInfoList, size);
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public interface TeamRepoService {
     Team findTeamsByTeamInfo(List<TeamDto> teamInfoList, int size);
+
     Optional<Team> findByTeamId(String teamId);
 }
 

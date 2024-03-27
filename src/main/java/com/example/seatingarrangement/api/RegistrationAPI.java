@@ -1,28 +1,24 @@
 package com.example.seatingarrangement.api;
 
+import com.example.seatingarrangement.constants.ApiConstant;
 import com.example.seatingarrangement.dto.*;
 import com.example.seatingarrangement.entity.CompanyDetails;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(value = "${SeatingArrangement}")
+@CrossOrigin()
+@RequestMapping(ApiConstant.BASIC_API_URL)
 public interface RegistrationAPI {
 
-    @PostMapping(value = "${sign-up}")
+    @PostMapping(ApiConstant.REGISTER)
     public ResponseEntity<ResponseDto> register(@Valid @RequestBody SignUpRequestDTO signUpRequestDTO);
 
-    @PostMapping(value = "${sign-in}")
+    @PostMapping(ApiConstant.LOGIN)
     public ResponseEntity<ResponseDto> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO);
 
-
-
-
-    @PostMapping(value = "${companyLogout}")
-    public ResponseEntity<ResponseDto> logout(@Valid @RequestParam String accessToken);
+    @PostMapping(ApiConstant.LOGOUT)
+    public ResponseEntity<ResponseDto> logout(@RequestBody TokenDto tokenDto);
 
 }
 

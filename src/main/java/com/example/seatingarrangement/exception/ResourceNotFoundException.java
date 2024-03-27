@@ -1,8 +1,8 @@
 package com.example.seatingarrangement.exception;
 
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
 
-    public ResourceNotFoundException(String error){
+    public ResourceNotFoundException(String error) {
         super(error);
     }
 }

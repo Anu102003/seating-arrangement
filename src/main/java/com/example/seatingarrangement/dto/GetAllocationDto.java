@@ -1,6 +1,5 @@
 package com.example.seatingarrangement.dto;
 
-import com.example.seatingarrangement.entity.Allocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -24,17 +24,17 @@ public class JWTServiceImpl implements JWTService {
 
     @Override
     public String extractUsername(String token) {
-//        return extractClaim(token,Claims::getSubject);
         return extractAllClaims(token).getSubject();
     }
+
     @Override
     public Date extractExpiration(String token) {
-//        return extractClaim(token,Claims::getExpiration);
         return extractAllClaims(token).getExpiration();
     }
+
     @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims= extractAllClaims(token);
+        final Claims claims = extractAllClaims(token);
         return null;
     }
 
@@ -49,11 +49,11 @@ public class JWTServiceImpl implements JWTService {
     }
 
     @Override
-    public String generateToken(String companyName,String sessionId) {
-        Map<String, String> claims= new HashMap<>();
+    public String generateToken(String companyName, String sessionId) {
+        Map<String, String> claims = new HashMap<>();
         claims.put("companyId", companyName);
         claims.put("sessionId", sessionId);
-        return createToken(claims,companyName);
+        return createToken(claims, companyName);
     }
 
     private String createToken(Map<String, String> claims, String companyName) {
@@ -62,26 +62,27 @@ public class JWTServiceImpl implements JWTService {
                 .setClaims(claims)
                 .setSubject(companyName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*10))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
 
     @Override
-    public String generateRefreshToken(String companyName,String sessionId) {
-        Map<String, String> claims= new HashMap<>();
+    public String generateRefreshToken(String companyName, String sessionId) {
+        Map<String, String> claims = new HashMap<>();
         claims.put("companyId", companyName);
         claims.put("sessionId", sessionId);
-        return createRefreshToken(claims,companyName);
+        return createRefreshToken(claims, companyName);
     }
+
     private String createRefreshToken(Map<String, String> claims, String companyName) {
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(companyName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*30))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -89,10 +90,10 @@ public class JWTServiceImpl implements JWTService {
 
     @Override
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username= extractUsername(token);
-        System.out.println(username.equals(userDetails.getUsername()) );
+        final String username = extractUsername(token);
+        System.out.println(username.equals(userDetails.getUsername()));
         System.out.println(isTokenExpired(token));
-        return(username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
@@ -109,7 +110,7 @@ public class JWTServiceImpl implements JWTService {
 
     private Key getSignKey() {
 
-        byte[] keyBytes= Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

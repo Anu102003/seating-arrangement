@@ -16,11 +16,11 @@ import java.net.http.HttpClient;
 
 public class ResponseDto {
 
-  private Object Data;
+    private Object Data;
 
-  private String Message;
+    private String Message;
 
-  private HttpStatus httpStatus;
+    private HttpStatus httpStatus;
 
 
 }

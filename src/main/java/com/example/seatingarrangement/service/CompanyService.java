@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface CompanyService {
-    ResponseEntity<ResponseDto> add(CompanyDto companyDto) ;
+    ResponseEntity<ResponseDto> add(CompanyDto companyDto);
 
     ResponseEntity<ResponseDto> getAllLayOut(String companyName);
 

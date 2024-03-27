@@ -1,5 +1,6 @@
 package com.example.seatingarrangement.service.impl;
 
+import com.example.seatingarrangement.constants.Constant;
 import com.example.seatingarrangement.dto.CompanyDto;
 import com.example.seatingarrangement.dto.LayoutDto;
 import com.example.seatingarrangement.dto.ResponseDto;
@@ -86,32 +87,36 @@ public class CompanyServiceImpl implements CompanyService {
             defaultLayout.setTotalSpace(availableSpacesCount(layoutDto.getDefaultLayout()));
             defaultLayout.setLayoutId(UUID.randomUUID().toString());
             modelMapper.map(defaultLayout, responseLayoutDto);
-            if (layoutDto.getLayoutId() != null) {
-                int ind = 0;
-                for (Company.DefaultLayout layout : company.getCompanyLayout()) {
-                    if (layout.getLayoutId().equals(layoutDto.getLayoutId())) {
-                        layout.setChanged(true);
-                        company.getCompanyLayout().set(ind,layout);
-                        break;
-                    }
-                    ind++;
-                }
-            }
+            if (layoutDto.getLayoutId() != null)
+                changeBoolean(company, layoutDto);
             company.getCompanyLayout().add(defaultLayout);
         }
-            responseLayoutDto.setCompanyName(layoutDto.getCompanyName());
-            companyRepository.save(company);
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(responseLayoutDto, "updates done", HttpStatus.OK));
+        responseLayoutDto.setCompanyName(layoutDto.getCompanyName());
+        companyRepository.save(company);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(responseLayoutDto, "updates done", HttpStatus.OK));
 
-        }
-        Company isValid (LayoutDto layoutDto) throws BadRequestException {
-            Optional<Company> company = companyRepository.findByCompanyName(layoutDto.getCompanyName());
-            if (company.isEmpty())
-                throw new BadRequestException("company not present");
-            if (layoutDto.getLayoutId() == null && layoutDto.getDefaultLayout() == null)
-                throw new BadRequestException("data not present");
-            if (layoutDto.getLayoutId() != null && companyRepoService.findByLayoutId(layoutDto.getLayoutId()) == null)
-                throw new BadRequestException("layoutId not present");
-            return company.get();
+    }
+
+    void changeBoolean(Company company, LayoutDto layoutDto) {
+        int ind = 0;
+        for (Company.DefaultLayout layout : company.getCompanyLayout()) {
+            if (layout.getLayoutId().equals(layoutDto.getLayoutId())) {
+                layout.setChanged(true);
+                company.getCompanyLayout().set(ind, layout);
+                break;
+            }
+            ind++;
         }
     }
+
+    Company isValid(LayoutDto layoutDto) throws BadRequestException {
+        Optional<Company> company = companyRepository.findByCompanyName(layoutDto.getCompanyName());
+        if (company.isEmpty())
+            throw new BadRequestException(Constant.COMPANY_NOT_FOUND);
+        if (layoutDto.getLayoutId() == null && layoutDto.getDefaultLayout() == null)
+            throw new BadRequestException("data not present");
+        if (layoutDto.getLayoutId() != null && companyRepoService.findByLayoutId(layoutDto.getLayoutId()) == null)
+            throw new BadRequestException(Constant.LAYOUT_NOT_FOUND);
+        return company.get();
+    }
+}

@@ -13,9 +13,10 @@ import java.util.Optional;
 
 
 @Repository
-public interface TeamRepository extends MongoRepository<Team,String> {
+public interface TeamRepository extends MongoRepository<Team, String> {
     @Aggregation(pipeline = {"{'$project':{'teams.teamCode': 0}}",
             "{'$match': {'teams': {'$all': ?0},'$expr':{'$eq':[{'$size': '$teams'},?1], }, },}"})
     Team findTeamsByTeamInfo(List<TeamDto> teamInfoList, int size);
+
     Optional<Team> findByTeamId(String teamId);
 }

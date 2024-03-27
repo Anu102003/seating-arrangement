@@ -11,5 +11,5 @@ public interface RegistrationService {
 
     LoginResponseDTO login(LoginRequestDTO loginRequestDTO);
 
-    ResponseEntity<ResponseDto> logout(String accessToken);
+    ResponseEntity<ResponseDto> logout(TokenDto tokenDto);
 }

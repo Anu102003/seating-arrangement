@@ -7,12 +7,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(AlreadyLogOutException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ResponseEntity<ResponseDto>  handleAlreadyLogOutException(AlreadyLogOutException exception){
-        ResponseDto response= new ResponseDto();
+    public ResponseEntity<ResponseDto> handleAlreadyLogOutException(AlreadyLogOutException exception) {
+        ResponseDto response = new ResponseDto();
         response.setHttpStatus(HttpStatus.CONFLICT);
         response.setMessage(exception.getMessage());
         response.setData(null);
@@ -21,8 +22,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ResponseDto>  handleResourceNotFoundException(ResourceNotFoundException exception){
-        ResponseDto response= new ResponseDto();
+    public ResponseEntity<ResponseDto> handleResourceNotFoundException(ResourceNotFoundException exception) {
+        ResponseDto response = new ResponseDto();
         response.setHttpStatus(HttpStatus.BAD_REQUEST);
         response.setMessage(exception.getMessage());
         response.setData(null);
@@ -73,7 +74,6 @@ public class GlobalExceptionHandler {
         response.setData(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
-
 
 
 }

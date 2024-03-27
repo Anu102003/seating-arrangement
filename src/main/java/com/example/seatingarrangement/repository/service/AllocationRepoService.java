@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface AllocationRepoService {
 
 
-    Optional<Allocation> findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(String layoutId, Type allocationType,Integer allocationPref);
+    Optional<Allocation> findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(String layoutId, Type allocationType, Integer allocationPref);
 
-   Optional<List<GetAllocationDto>> findByDefaultLayoutId(String layoutId);
+    Optional<List<GetAllocationDto>> findByDefaultLayoutId(String layoutId);
 
 }

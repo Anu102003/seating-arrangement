@@ -8,11 +8,10 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
 
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class  TeamObjectDto {
+public class TeamObjectDto {
 
     private String layoutId;
 
@@ -22,4 +21,4 @@ public class  TeamObjectDto {
 
     private Integer preference;
 }
-    //Asc =2 Desc =1  rand=3
+//Asc =2 Desc =1  rand=3

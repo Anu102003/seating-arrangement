@@ -23,15 +23,14 @@ public class Allocation {
     @Id
     @UuidGenerator
     private String allocationId;
-//    private String companyName;
-     private String defaultLayoutId;
-   private String teamId;
-   private Integer algorithmPref;
-   @CreatedDate
-     Date createdDate;
-   @Enumerated
-   private Type allocationType;
-   private String[][] allocationLayout;
+    private String defaultLayoutId;
+    private String teamId;
+    private Integer algorithmPref;
+    @CreatedDate
+    Date createdDate;
+    @Enumerated
+    private Type allocationType;
+    private String[][] allocationLayout;
 }
 
 //{
@@ -48,7 +47,6 @@ public class Allocation {
 //        [1, 1, 0, 1, 1, 1, 1, 0, 1, 1]
 //        ]
 //        }
-
 
 
 //{

@@ -1,5 +1,6 @@
 package com.example.seatingarrangement.service.impl;
 
+import com.example.seatingarrangement.constants.Constant;
 import com.example.seatingarrangement.dto.*;
 import com.example.seatingarrangement.entity.Allocation;
 import com.example.seatingarrangement.entity.Team;
@@ -33,14 +34,14 @@ public class GreedyImpl extends AllocationAbstract {
     private Integer pref = 0;
     private int[][] dp;
 
-    private LinkedHashMap<String,Integer> finalMap=new LinkedHashMap<String,Integer>();
+    private LinkedHashMap<String, Integer> finalMap = new LinkedHashMap<String, Integer>();
     private String[][] teamNames;
     private Map<String, Character> tempTeamList = new LinkedHashMap<>();
     private List<UserReferenceDto.TeamReference> tempTeamList2 = new ArrayList<>();
 
-@Autowired
+    @Autowired
     public GreedyImpl(TeamRepoService teamRepoService, CompanyRepoService companyRepoService, TeamRepository teamRepository, AllocationRepoService allocationRepoService, AllocationRepository allocationRepository, ModelMapper modelMapper) {
-        super(teamRepoService,companyRepoService,teamRepository,allocationRepoService, allocationRepository, modelMapper);
+        super(teamRepoService, companyRepoService, teamRepository, allocationRepoService, allocationRepository, modelMapper);
     }
 
     private static void printTeamNames(String[][] teamNames) {
@@ -199,57 +200,54 @@ public class GreedyImpl extends AllocationAbstract {
         List<TeamInfo> teamInfos = new ArrayList<>();
         String teamId;
         Team team1 = teamRepoService.findTeamsByTeamInfo(teamObjectDto.getTeamDtoList(), teamObjectDto.getTeamDtoList().size());
-        System.out.println(team1+"goooooooooooood");
+        System.out.println(team1 + "goooooooooooood");
         if (team1 != null) {
-            Optional<Team> team2=teamRepository.findByTeamId(team1.getTeamId());
+            Optional<Team> team2 = teamRepository.findByTeamId(team1.getTeamId());
             System.out.println("inside 1");
             teamId = team1.getTeamId();
             Type type;
-            if(teamObjectDto.getPreference()!=3){
-                if(teamObjectDto.getPreference()==1) {
-                    type= Type.DESC;
-                }
-                else
-                    type= Type.ASC;
-                Optional<Allocation> allocatedLayout=allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(teamObjectDto.getLayoutId(),type,teamObjectDto.getAlgorithmPref());
-                System.out.println("allocatedLayout"+"   "+allocatedLayout);
+            if (teamObjectDto.getPreference() != 3) {
+                if (teamObjectDto.getPreference() == 1) {
+                    type = Type.DESC;
+                } else
+                    type = Type.ASC;
+                Optional<Allocation> allocatedLayout = allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(teamObjectDto.getLayoutId(), type, teamObjectDto.getAlgorithmPref());
+                System.out.println("allocatedLayout" + "   " + allocatedLayout);
                 if (allocatedLayout.isPresent()) {
-                    UserReferenceDto userReferenceDto=new UserReferenceDto();
+                    UserReferenceDto userReferenceDto = new UserReferenceDto();
 
                     userReferenceDto.setAllocation(allocatedLayout.get().getAllocationLayout());
 
-                    Optional<Team> team3=teamRepoService.findByTeamId(allocatedLayout.get().getTeamId());
+                    Optional<Team> team3 = teamRepoService.findByTeamId(allocatedLayout.get().getTeamId());
 
-                    ArrayList<UserReferenceDto.TeamReference> teamReferences=new ArrayList<>();
+                    ArrayList<UserReferenceDto.TeamReference> teamReferences = new ArrayList<>();
 
-                    for(TeamInfo teamInfo:team3.get().getTeams())
-                    {
-                        UserReferenceDto.TeamReference teamReference=new UserReferenceDto.TeamReference(teamInfo.getTeamName(),teamInfo.getTeamCode(),teamInfo.getTeamCount());
-                    teamReferences.add(teamReference);
+                    for (TeamInfo teamInfo : team3.get().getTeams()) {
+                        UserReferenceDto.TeamReference teamReference = new UserReferenceDto.TeamReference(teamInfo.getTeamName(), teamInfo.getTeamCode(), teamInfo.getTeamCount());
+                        teamReferences.add(teamReference);
                     }
                     userReferenceDto.setTeamReferenceList(teamReferences);
-                  return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(userReferenceDto,"already calculated",HttpStatus.OK));
+                    return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(userReferenceDto, Constant.ALREADY_CALCULATED, HttpStatus.OK));
 //                    throw new BadRequestException("already Selected");
                 }
             }
-            for(TeamInfo teamInfo: team2.get().getTeams())
-                {
-                 teamList.put(teamInfo.getTeamName(),teamInfo.getTeamCode().charAt(0));
-                 map.put(teamInfo.getTeamName(),teamInfo.getTeamCount());
-                }
-                finalMap.putAll(map);
-                tempTeamList = teamList;
-                SeatingCalculationDto seatingCalculationDto = new SeatingCalculationDto(getLayoutDto.getLayout(), teamList, map);
-                seatingCalculation(seatingCalculationDto);
-                 System.out.println("teamList"+teamList);
-                System.out.println("map"+map);
-                team=team2.get();
+            for (TeamInfo teamInfo : team2.get().getTeams()) {
+                teamList.put(teamInfo.getTeamName(), teamInfo.getTeamCode().charAt(0));
+                map.put(teamInfo.getTeamName(), teamInfo.getTeamCount());
+            }
+            finalMap.putAll(map);
+            tempTeamList = teamList;
+            SeatingCalculationDto seatingCalculationDto = new SeatingCalculationDto(getLayoutDto.getLayout(), teamList, map);
+            seatingCalculation(seatingCalculationDto);
+            System.out.println("teamList" + teamList);
+            System.out.println("map" + map);
+            team = team2.get();
         } else {
             System.out.println("inside 2");
             TeamInfo teamInfo = new TeamInfo();
             LinkedHashMap<String, Character> tempList = new LinkedHashMap<>();
             for (String name : map.keySet()) {
-                teamInfo=new TeamInfo();
+                teamInfo = new TeamInfo();
                 if (tempList.isEmpty()) {
                     tempList.put(name, 'A');
                     teamInfo.setTeamCode("A");
@@ -260,21 +258,21 @@ public class GreedyImpl extends AllocationAbstract {
                     tempList.put(name, lastId);
                     teamInfo.setTeamCode("" + lastId);
                 }
-                if(tempList.size()==1)
+                if (tempList.size() == 1)
                     teamList = tempList;
                 teamInfo.setTeamName(name);
                 teamInfo.setTeamCount(map.get(name));
                 teamInfos.add(teamInfo);
-                System.out.println("teamInfos"+teamInfos);
+                System.out.println("teamInfos" + teamInfos);
             }
             tempTeamList = teamList;
             SeatingCalculationDto seatingCalculationDto = new SeatingCalculationDto(getLayoutDto.getLayout(), teamList, map);
-            System.out.println("teamList"+teamList);
-            System.out.println("map"+map);
+            System.out.println("teamList" + teamList);
+            System.out.println("map" + map);
             seatingCalculation(seatingCalculationDto);
             finalMap.putAll(map);
             log.info(tempList.toString());
-             team = new Team();
+            team = new Team();
             team.setTeamId(UUID.randomUUID().toString());
             team.setTeams(teamInfos);
             team.setLayoutId(layoutId);
@@ -295,8 +293,9 @@ public class GreedyImpl extends AllocationAbstract {
         allocationRepository.save(allocation);
         System.out.println(allocation);
         log.info("teamList" + tempTeamList1);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(userReferenceDto, "allocation created", HttpStatus.OK));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(userReferenceDto, Constant.ALLOCATION_CREATED, HttpStatus.OK));
     }
+
     private void seatingCalculation(SeatingCalculationDto seatingCalculationDto) {
         arr = seatingCalculationDto.getLayOut();
         teamNames = new String[arr.length][arr[0].length];
@@ -389,7 +388,7 @@ public class GreedyImpl extends AllocationAbstract {
                     al.set(i, al.get(i) - dp[temph][tempg]);
                 }
             }
-            System.out.println("hi"+tempTeamList2);
+            System.out.println("hi" + tempTeamList2);
         }
     }
 

@@ -27,9 +27,9 @@ public class Session {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastmodifiedDate;
-     @ManyToOne()
+    @ManyToOne()
     private CompanyDetails companyDetails;
 
-     private LocalDateTime logoutTime;
+    private LocalDateTime logoutTime;
 
 }

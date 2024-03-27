@@ -8,12 +8,9 @@ public interface RegistrationRepoService {
     CompanyDetails save(CompanyDetails companyDetails);
 
 
-
     Optional<CompanyDetails> findBycompanyName(String username);
 
     Optional<CompanyDetails> findByEmail(String emailid);
-
-
 
 
     Optional<CompanyDetails> findByCompanyNameOrEmail(String companyName, String email);

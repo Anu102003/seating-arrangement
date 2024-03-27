@@ -13,10 +13,11 @@ public class CompanyInfoDetails implements UserDetails {
     private final String password;
     private List<GrantedAuthority> authorities;
 
-    public CompanyInfoDetails(CompanyDetails companyDetails){
+    public CompanyInfoDetails(CompanyDetails companyDetails) {
         companyName = companyDetails.getCompanyName();
-        password= companyDetails.getPassword();
+        password = companyDetails.getPassword();
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
