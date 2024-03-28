@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface AllocationRepository extends MongoRepository<Allocation, String> {
-    Optional<Allocation> findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPref(String layoutId, Type allocationType, Integer allocationPref);
+    Optional<Allocation> findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPrefAndTeamId(String layoutId, Type allocationType, Integer allocationPref,String teamId);
 
     @Aggregation({
             "{$match: {defaultLayoutId: '?0'}}",

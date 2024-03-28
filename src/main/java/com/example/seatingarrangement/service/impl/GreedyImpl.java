@@ -209,7 +209,7 @@ public class GreedyImpl extends AllocationAbstract {
                     type = Type.DESC;
                 } else
                     type = Type.ASC;
-                Optional<Allocation> allocatedLayout = allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(teamObjectDto.getLayoutId(), type, teamObjectDto.getAlgorithmPref());
+                Optional<Allocation> allocatedLayout = allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPrefAndTeamId(teamObjectDto.getLayoutId(), type, teamObjectDto.getAlgorithmPref(),teamId);
                 log.info("allocatedLayout" + "   " + allocatedLayout);
                 if (allocatedLayout.isPresent()) {
                     UserReferenceDto userReferenceDto = new UserReferenceDto();

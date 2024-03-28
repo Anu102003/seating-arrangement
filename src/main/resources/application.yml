@@ -20,3 +20,11 @@ spring:
             mode: none
 server:
   port: 8081
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG

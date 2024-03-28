@@ -214,7 +214,7 @@ public class BacktrackingImpl extends AllocationAbstract {
                     type = Type.DESC;
 
 
-                Optional<Allocation> allocatedLayout = allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(teamObjectDto.getLayoutId(), type, teamObjectDto.getAlgorithmPref());
+                Optional<Allocation> allocatedLayout = allocationRepoService.findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPrefAndTeamId(teamObjectDto.getLayoutId(), type, teamObjectDto.getAlgorithmPref(),teamId);
                 log.info(allocatedLayout.toString());
                 if (allocatedLayout.isPresent()) {
                     UserReferenceDto userReferenceDto = new UserReferenceDto();
