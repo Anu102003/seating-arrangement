@@ -19,8 +19,8 @@ public class AllocationRepoServiceImpl implements AllocationRepoService {
 
 
     @Override
-    public Optional<Allocation> findByDefaultLayoutIdAndAllocationTypeAndAllocationPreference(String layoutId, Type allocationType, Integer allocationPref) {
-        return allocationRepository.findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPref(layoutId, allocationType, allocationPref);
+    public Optional<Allocation> findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPrefAndTeamId(String layoutId, Type allocationType, Integer allocationPref,String teamId) {
+        return allocationRepository.findByDefaultLayoutIdAndAllocationTypeAndAlgorithmPrefAndTeamId(layoutId, allocationType, allocationPref,teamId);
     }
 
     @Override

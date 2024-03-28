@@ -41,6 +41,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             username = jwtService.extractUsername(token);
             Claims claims = jwtService.extractAllClaims(token);
             String sessionId = claims.get("sessionId").toString();
+            System.out.println(sessionId+"  sessionId");
             Optional<Session> session = sessionRepoService.findBySessionId(sessionId);
             if (session.get().getLogoutTime() != null) {
                 throw new BadRequestException(Constant.ALREADY_LOGGED_OUT);
