@@ -50,7 +50,7 @@ public class AllocationServiceImpl implements AllocationService {
 
     @Override
     public ResponseEntity<ResponseDto> addAllocation(TeamObjectDto teamObjectDto) throws BadRequestException {
-
+        System.out.println(teamObjectDto);
         if (teamObjectDto.getAlgorithmPref() == 1) {
             GreedyImpl greedyImpl = new GreedyImpl(teamRepoService, companyRepoService, teamRepository, allocationRepoService, allocationRepository, modelMapper);
 

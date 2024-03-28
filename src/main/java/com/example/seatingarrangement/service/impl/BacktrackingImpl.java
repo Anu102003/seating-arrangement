@@ -266,13 +266,13 @@ public class BacktrackingImpl extends AllocationAbstract {
         }
         log.info(teamList.toString());
         int[][] defaultLayout = getLayoutDto.getLayout();
-        if(getLayoutDto.getCompanyName().equalsIgnoreCase("divum")) {
-            for(int i=0;i<defaultLayout.length;i++){
-                for (int j=0;j<defaultLayout[0].length;j++){
-                    if(j==14)
-                        defaultLayout[i][j]=-1;
-                    else if (i==11&&j<=14)
-                        defaultLayout[i][j]=-1;
+        if (getLayoutDto.getCompanyName().equalsIgnoreCase("divum")) {
+            for (int i = 0; i < defaultLayout.length; i++) {
+                for (int j = 0; j < defaultLayout[0].length; j++) {
+                    if (j == 14)
+                        defaultLayout[i][j] = -1;
+                    else if (i == 11 && j <= 14)
+                        defaultLayout[i][j] = -1;
                 }
             }
             System.out.println(Arrays.deepToString(defaultLayout));
