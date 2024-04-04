@@ -1,0 +1,45 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+.allocation-page {
+    @include displayFlex;
+    flex-direction: column;
+.h-1{
+    // text-align: start;
+    width: 70%;
+    margin-left: 0rem;
+    @include fontS28B600;
+    margin-bottom: 3rem;
+}
+    .heading {
+        @include heading;
+    }
+
+    .heading-1 {
+        text-align: center;
+        line-height: 1.5;
+        @include fontS22B700;
+        letter-spacing: 1px;
+    }
+
+    .list {
+        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+                          margin: 3.3rem 0;
+        padding: 2rem;
+        width: 60%;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: rgba(3, 103, 214, 0.3) 0px 0px 0px 3px;
+        }
+    }
+
+    .navigate-btn-wrapper {
+        @include displayFlex;
+        @include max-wt-ht;
+        margin-top: 8rem;
+
+        .navigate-btn {
+            @include button(#4FD7F7);
+        }
+    }
+}

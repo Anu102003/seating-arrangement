@@ -1,0 +1,160 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+
+
+.operations-page {
+    margin: 0 14rem;
+
+    .add-btn-wrapper {
+        // position: fixed;
+        width: 100%;
+        @include justifyEnd;
+
+        .add-btn {
+            @include button(#2B96FF);
+        }
+    }
+
+    .operation-layout-page {
+        margin-top: 5rem;
+
+        .MyTable {
+            border-collapse: collapse;
+            text-align: center;
+            @include max-wt-ht;
+            .filter-options {
+                display: flex;
+                align-self: flex-start;
+                gap: 1rem;
+    
+                .option-btns {
+                    border: 0.6px solid #ccc;
+                    border-radius: 5px;
+                    color: #323232;
+                    padding: 10px 20px;
+                    margin-bottom: 3rem;
+                    font-size: 16px;
+                    font-weight: 600;
+    
+                    &:hover {
+                        cursor: pointer;
+                        box-shadow: rgba(35, 35, 39, 0.25) 0px 0px 0px 0px inset, rgba(0, 0, 0, 0.3) 0px 0px 36px -18px inset;
+                    }
+                }
+                .option-btn {
+                    border: 0.6px solid #585757;
+                    border-radius: 5px;
+                    color: #ffffff;
+                    background-color: #534f4f;
+                    padding: 10px 20px;
+                    margin-bottom: 3rem;
+                    font-size: 16px;
+                    font-weight: 600;
+    
+                    &:hover {
+                        cursor: pointer;
+                        box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px inset, rgba(0, 0, 0, 0.3) 0px 0px 36px -18px inset;
+                    }
+                }
+            }
+            .operation-layout-list {
+                @include max-wt-ht;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+                border-radius: 10px;
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                margin-bottom: 7rem;
+                padding: 0rem 0 4rem;
+
+                .heading {
+                    @include heading;
+                    padding: 1rem 0 0.5rem;
+                }
+
+                .grid-wrapper {
+                    cursor: pointer;
+                    @include displayFlex;
+                    flex-direction: column;
+                    gap: 3rem;
+                    padding-left: 3rem;
+                }
+
+                .btn-wrapper {
+                    @include displayFlex;
+                    gap: 5rem;
+
+                    .update-btn {
+                        @include button(#3EBA81);
+                        height: 50px;
+                    }
+
+                    .delete-btn {
+                        @include button(#F34541);
+                        height: 50px;
+                    }
+
+                    @media only screen and (max-width:1660px) {
+                        flex-direction: column;
+                    }
+
+                    @media only screen and (max-width:700px) {
+                        margin: 3rem 0 10rem;
+                        gap: 2rem
+                    }
+                }
+
+                .grid-box {
+                    height: 3rem;
+                    width: 3rem;
+                    border: 5px solid white;
+                    border-radius: 5px;
+
+                    &:hover {
+                        // box-shadow: rgba(0, 0, 0, 0.378) 10px 8px 46px -28px inset;
+                        cursor: pointer;
+                    }
+                }
+
+
+                @media only screen and (max-width:1210px) {
+                    margin-bottom: 4rem;
+                }
+
+                @media only screen and (max-width:700px) {
+                    display: inline;
+                    border: none;
+                }
+
+            }
+        }
+
+        .update-popup-parent {
+            @include popup-parent;
+
+            .update-popup {
+                @include popup;
+                width: 70%;
+                height: 80%;
+            }
+        }
+        .delete-popup-parent {
+            @include popup-parent;
+
+            .delete-popup {
+                @include popup;
+            }
+        }
+    }
+
+    @media only screen and (max-width:1130px) {
+        margin: 0 10rem;
+    }
+
+    @media only screen and (max-width:845px) {
+        margin: 0 5rem;
+    }
+
+    @media only screen and (max-width:655px) {
+        margin: 0 2rem;
+    }
+}

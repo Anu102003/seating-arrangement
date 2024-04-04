@@ -1,0 +1,9 @@
+.radio-btn {
+    display: flex;
+    gap: .5rem;
+    cursor: pointer;
+
+    @media only screen and (max-width:450px) {
+        padding-bottom: 1rem;
+    }
+}

@@ -1,0 +1,59 @@
+@import "../../styles/defaultmixin.scss";
+
+.layout-popup {
+    padding: 3rem;
+    @include max-wt-ht;
+
+    .head {
+        @include fontS28B600;
+    }
+
+    .options-btn {
+        @include alignCenter;
+        justify-content: space-around;
+        margin: 4rem 0 3rem;
+
+        button {
+            @include btn-basic;
+            padding: 10px;
+            background: #12acf9;
+            color: white;
+            @include fontS20B700;
+            border-radius: 35px;
+            width: 30%;
+            padding: 1rem;
+            min-width: 150px;
+            &:hover{
+                opacity: 0.9;
+            }
+        }
+        @media  only screen and (max-width:1450px) {
+            flex-direction: column;
+            gap: 3rem;
+        }
+    }
+
+    .p-1 {
+        margin-top: 2.5rem;
+        color: #3c4858;
+        font-size: 20px;
+    }
+    .p-2 {
+        margin-top: 2.5rem;
+        color: #1e252c;
+        font-size: 20px;
+    }
+
+    .error {
+        @include danger;
+    }
+
+    .home__buttons {
+        @include true-false-btn;
+        padding-top: 4rem;
+margin: 1rem 0;
+        button {
+            min-width: 110px;
+        }
+    }
+}

@@ -1,0 +1,90 @@
+@import "../../../assets/styles/defaultmixin.scss";
+
+
+.allocation-layout {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-bottom: 7rem;
+    padding: 3rem 0rem 2rem;
+
+    .h-3 {
+        padding: 1rem 0 0rem 3rem;
+
+        .h-2 {
+            @include fontS22B700;
+            padding-right: 0.5rem;
+        }
+
+        .download-btn {
+            @include button(#275EFE);
+            padding: 0.8rem 1rem;
+            margin-top: 1rem;
+        }
+    }
+
+    .allocation-team-list {
+
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 4rem;
+        padding: 0 3rem;
+
+        .team-list-wrapper {
+            margin-top: 3rem;
+            display: flex;
+            height: max-content;
+            align-items: start;
+
+            .team-list {
+                margin: 1rem 0 6rem;
+                border-collapse: collapse;
+
+                thead td {
+                    @include table-cell;
+                    background-color: rgb(87, 64, 64);
+                    color: white;
+                    border: 1px solid black;
+                    @include fontS18B700;
+                    padding: 10px;
+
+                }
+
+                tr td {
+                    @include table-cell;
+                    font-size: 18px;
+                    padding: 10px;
+
+                    .color-code-wrapper {
+                        width: 100%;
+                        @include displayFlex;
+                    }
+
+                    .color-code {
+                        height: 30px;
+                        width: 30px;
+                    }
+                }
+
+            }
+
+            @media screen and (max-width:1550px) {
+                overflow-x: scroll;
+                overflow-y: hidden;
+            }
+        }
+
+        .table-wrapper {
+            @include displayFlex;
+            width: 100%;
+            margin-top: 3rem;
+
+            .MyTable {
+                border-collapse: collapse;
+                text-align: center;
+                height: 100%;
+                margin: 2.5rem 0 4rem;
+                width: 100%;
+            }
+        }
+    }
+
+}

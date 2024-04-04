@@ -1,0 +1,156 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+.login-grid-card {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+
+    .login-grid-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        box-shadow: rgba(0, 0, 0, 0.2) 10px 18px 50px 7px;
+        border: 15px;
+
+        .login-left-container {
+            img {
+                object-fit: cover;
+                @include max-wt-ht;
+            }
+        }
+
+        .login-right-wrapper {
+            background-color: #005BEA;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+
+            .login-right-container {
+                width: 90%;
+                margin-top: 1.5rem;
+                text-align: center;
+
+                .login-sign {
+                    margin-top: 25px;
+                }
+
+                @media screen and (max-width:1000px) {
+                    padding: 0 2rem;
+                    width: 100%;
+                }
+            }
+        }
+
+
+    }
+}
+
+
+
+
+.headings {
+    @include fontS22B700;
+    padding: 1rem 0 1.5rem;
+    color: white;
+    letter-spacing: 1px;
+}
+
+
+.fields {
+    @include displayFlex;
+    width: 100%;
+
+    .input-field-wrapper {
+        position: relative;
+        width: max-content;
+        color: #75a4f6;
+
+        .login-text {
+            width: 268px;
+            height: 36px;
+            margin: 5px;
+            font-size: 16px;
+            padding: 3px 1rem 3px 2.3rem;
+            border: 1px solid #DBDBDB;
+            background-color: #FAFAFA;
+            // padding-left: 10px;
+            border-radius: 3px;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 1rem;
+            top: 15px;
+        }
+
+        .icon {
+            position: absolute;
+            left: 1rem;
+            top: 0.9rem;
+        }
+    }
+
+    @media only screen and (max-width:1000px) {
+        display: inline;
+    }
+}
+
+.login-button {
+    width: 278px;
+    height: 36px;
+    border-radius: 8px;
+    font-weight: bold;
+    // background-color: #4CB5F9;
+    background-color: #FFC001;
+    border: none;
+    color: rgb(60, 50, 50);
+    margin-top: 10px;
+    cursor: pointer;
+    margin-bottom: 25px;
+
+}
+
+.login-sign-option {
+    height: 63px;
+    width: 90%;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+
+    .login-sign {
+        font-size: 16px;
+
+        .sign-text {
+            font-weight: 800;
+            font-size: 20px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
+
+    @media only screen and (max-width:1000px) {
+        width: 100%;
+    }
+}
+
+.login-error {
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 0px;
+    text-align: justify;
+    @include displayFlex;
+    // width: 300px;
+    margin: 0 9rem;
+    padding-left: 20px;
+
+    @media screen and (max-width:2000px) {
+        margin: 0 6rem;
+    }
+
+    @media screen and (max-width:1500px) {
+        margin: 0 3rem;
+    }
+
+    @media screen and (max-width:1000px) {
+        margin: 0;
+    }
+
+}

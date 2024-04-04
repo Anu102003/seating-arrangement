@@ -1,0 +1,45 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+.layout-page{
+    margin: 15rem 10rem 10rem;
+}
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.column{
+    margin: 5px;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 1px solid black;
+    color: white;
+}
+.active{
+    background: green;
+    color: green;
+}
+.submit-btn-container{
+    width: 100%;
+    margin: 3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.submit-btn{
+    padding: 0.6rem;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    background-color: #007bff;
+}
+.product-popup-parent {
+    @include popup-parent;
+
+    .product-popup {
+        @include popup;
+    }
+}

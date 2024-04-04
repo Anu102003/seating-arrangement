@@ -1,0 +1,82 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+
+.navbar-wrapper {
+    margin-bottom: 8rem;
+
+    .NavBar {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        height: 5.5rem;
+        @include alignCenter;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        z-index:2;
+
+        .navbar-container {
+            @include max-wt-ht;
+            padding: 0 4rem;
+            margin: auto;
+            @include justifySpaceBt;
+
+            .nav-menu-bar {
+                @include max-wt-ht;
+                @include alignCenter;
+                gap: 7rem;
+
+                .nav-menu-lists {
+                    height: 100%;
+                    @include displayFlex;
+                    
+                    .nav-menu-container {
+                        height: 100%;
+                        position: relative;
+                        @include displayFlex;
+
+                        .nav-menu {
+                            height: 100%;
+                            @include displayFlex;
+                            min-width: 130px;
+                            cursor: pointer;
+                        }
+                        .nav-menu-hr{
+                            position: absolute;
+                            bottom: 1.4rem;
+                            height: 3px;
+                            width: 80%;
+                            background-color: #088b64;
+                        }
+                    }
+                }
+            }
+            .companyname-wrapper{
+                padding-right: 3rem;
+                @include displayFlex;
+                gap:0.5rem;
+                cursor: pointer;
+                position: relative;
+                .popup{
+                    position: absolute;
+                    top:3.5rem;
+                    padding: 15px;
+                    background-color: rgb(228, 229, 229);
+                }
+            }
+            .logout-btn {
+                @include justifySpaceBt;
+                gap:1rem;
+                @include btn-basic;
+                background-color: #13b282;
+                color: white;
+                @include fontS18B700;
+                border-radius: 25px;
+                padding: 0.7rem 2rem;
+                &:hover{
+                    opacity: 0.9;
+                }
+            }
+        }
+    }
+}

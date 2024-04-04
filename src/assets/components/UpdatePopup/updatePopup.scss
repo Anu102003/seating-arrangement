@@ -1,0 +1,21 @@
+@import "../../styles/defaultmixin.scss";
+.update-popup-page{
+    width: 100%;
+    .heading{
+        @include heading;
+        margin: 2rem 0;
+    }
+    .table{
+        height: 100%;
+        width: 100%;
+        margin: 2rem 0;
+    }
+    .submit-wrapper{
+        width: 100%;
+        @include displayFlex;
+        .submit-btn{
+            @include button(#2B96FF);
+            margin: 2rem 0;
+        }
+    }
+}

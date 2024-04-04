@@ -1,0 +1,20 @@
+@import "../../styles/defaultmixin.scss";
+
+.MyTable {
+    border-collapse: collapse;
+    // border: 1px solid grey;
+    text-align: center;
+    @include max-wt-ht;
+
+    .grid-box {
+        height: 2.5rem;
+        width: 2.5rem;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+
+    @media only screen and (max-width:1210px) {
+        margin-bottom: 4rem;
+    }
+
+}

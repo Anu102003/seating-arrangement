@@ -1,0 +1,12 @@
+@import "../../styles/defaultmixin.scss";
+
+.error-wrapper{
+@include max-wt-ht;
+@include alignCenter;
+flex-direction: column;
+    .error-txt{
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 3.5rem;
+    }
+}

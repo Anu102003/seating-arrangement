@@ -1,0 +1,92 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+$input-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 2px;
+$home-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+
+.home-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1.3rem;
+
+    &__left {
+        @include max-wt-ht;
+
+        img {
+            object-fit: cover;
+        }
+
+        @media only screen and (max-width:1290px) {
+            display: none;
+        }
+    }
+
+    &__right {
+        @include displayFlex;
+        flex-direction: column;
+        @include max-wt-ht;
+        border-radius: 1.5rem;
+        margin: auto;
+        padding: 0 2rem 1.5rem;
+        gap: 3rem;
+
+
+        .home {
+            box-shadow: $home-box-shadow;
+            height: max-content;
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 3rem;
+
+            &__heading {
+                @include heading;
+                margin-bottom: 1rem;
+            }
+
+            &__head {
+                margin-top: 1.2rem;
+                @include fontS18B700;
+                @include alignCenter;
+                gap: 0.5rem;
+                color: rgb(46, 45, 45);
+
+                .danger {
+                    @include danger;
+                }
+            }
+
+            &__input {
+                @include input-box;
+            }
+
+            .activeInput {
+                box-shadow: $input-box-shadow;
+            }
+
+            .error {
+                @include danger;
+                font-size: 16px;
+            }
+
+            .p-1 {
+                margin-top: 2.5rem;
+                color: #3c4858;
+                font-size: 18px;
+            }
+
+            &__buttons {
+                @include true-false-btn;
+            }
+        }
+
+        @media only screen and (max-width:1290px) {
+            margin-top: 10rem;
+        }
+    }
+
+    @media only screen and (max-width:1290px) {
+        display: inline;
+    }
+}

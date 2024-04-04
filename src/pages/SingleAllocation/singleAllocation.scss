@@ -1,0 +1,15 @@
+@import "../../assets/styles/defaultmixin.scss";
+
+
+.single-allocation-page {
+    margin: 0 8rem 4rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    padding: 5rem 4rem 0.5rem;
+
+
+    .h-1 {
+        @include heading;
+        padding-bottom: 3rem;
+    }
+
+}
