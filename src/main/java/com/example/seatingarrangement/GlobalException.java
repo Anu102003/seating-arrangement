@@ -13,6 +13,6 @@ public class GlobalException {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseDto> handleException(Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto(null, e.toString(), null));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto(null, e.getMessage(), null));
     }
 }

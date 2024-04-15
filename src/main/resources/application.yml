@@ -1,11 +1,12 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/Seating-Management
+#      uri: mongodb://localhost:27017/Seating-Management
+      uri: mongodb+srv://anu102003:aN102003u$@cluster0.phobywc.mongodb.net/Seating-Management?retryWrites=true&w=majority&appName=Cluster0
   datasource:
     url: jdbc:postgresql://localhost:5432/seating
     username: postgres
-    password: root
+    password: aN102003u$
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -19,4 +20,4 @@ spring:
           validation:
             mode: none
 server:
-  port: 8080
+  port: 8090
