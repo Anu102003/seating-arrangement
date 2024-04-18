@@ -4,9 +4,13 @@ spring:
 #      uri: mongodb://localhost:27017/Seating-Management
       uri: mongodb+srv://anu102003:aN102003u$@cluster0.phobywc.mongodb.net/Seating-Management?retryWrites=true&w=majority&appName=Cluster0
   datasource:
-    url: jdbc:postgresql://localhost:5432/seating
-    username: postgres
-    password: aN102003u$
+#    url: jdbc:postgresql://localhost:5432/seating
+#    username: postgres
+#    password: aN102003u$
+
+    url: jdbc:postgresql://dpg-cogcdnev3ddc73ea2jtg-a.oregon-postgres.render.com:5432/database_render_seating_arrangement
+    username: database_render_seating_arrangement_user
+    password: nLmtEhSEZD0SCXHffDeLAGVQFf8JYuhB
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
