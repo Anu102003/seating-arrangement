@@ -126,10 +126,10 @@ const Seating = () => {
       setFileSpace(res.data.spacesOccupied)
       if (!inCorrectFile) {
         if (res.data.spacesOccupied <= availableSpaces) {
-        setCsvData(res?.data?.teamDtoList)
-        setError((prevError) => ({ ...prevError, fileDataIncorrect: false }))
+          setCsvData(res?.data?.teamDtoList)
+          setError((prevError) => ({ ...prevError, fileDataIncorrect: false }))
         }
-         else {
+        else {
           setError((prevError) => ({ ...prevError, fileDataIncorrect: true }))
           setFile("")
           setTeamList([])
@@ -309,7 +309,7 @@ const Seating = () => {
 
         </div>
         :
-        <div className="container-1 ">
+        <div className="container ">
           <div className="layout-wrapper">
             <h2>Team Allocation</h2>
             <div className="btn-wrapper">
@@ -329,6 +329,28 @@ const Seating = () => {
             </div>
             <div className="filter-btn-wrapper">
               <button onClick={handleSubmit} className="filter-btn">Apply Filter</button>
+            </div>
+            <div className="team-key-continer">
+              {teamNameList && <h2>Team Keys</h2>}
+              <table className="team-key-list key-table">
+                <thead>
+                  <td>Team Key</td>
+                  <td>Team Name</td>
+                  <td>Team Count</td>
+                </thead>
+                <tbody>
+                  {orderedTeamList &&
+                    orderedTeamList.map((team) => {
+                      return (
+                        <tr>
+                          <td>{team.key}</td>
+                          <td>{team.name}</td>
+                          <td>{team.count}</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
             </div>
             <table className="MyTable MyTable-2">
               <tbody>
@@ -358,28 +380,7 @@ const Seating = () => {
             </table>
 
           </div>
-          <div className="team-key-continer">
-            {teamNameList && <h2>Team Keys</h2>}
-            <table className="team-key-list key-table">
-              <thead>
-                <td>Team Key</td>
-                <td>Team Name</td>
-                <td>Team Count</td>
-              </thead>
-              <tbody>
-                {orderedTeamList &&
-                  orderedTeamList.map((team) => {
-                    return (
-                      <tr>
-                        <td>{team.key}</td>
-                        <td>{team.name}</td>
-                        <td>{team.count}</td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
+
           {/* )} */}
         </div>
       }

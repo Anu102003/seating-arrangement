@@ -9,6 +9,7 @@ $input-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 2px;
     // background-color: #F3F3F3;
     @include displayFlex;
     min-height: 50vh;
+    margin-top: 8rem;
 
     .form-container {
         @include justifyCenter;

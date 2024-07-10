@@ -53,7 +53,7 @@ export const loginApi = (data) => {
         })
         .catch(error => {
             console.log('Failed to login layout', error);
-            throw error; 
+            return error; 
         });
 };
 export const registerApi = async (data) => {

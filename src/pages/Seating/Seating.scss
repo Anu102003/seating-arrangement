@@ -257,6 +257,7 @@
 .team-key-continer {
     @include alignCenter;
     flex-direction: column;
+    margin-bottom: 2rem;
 
     .team-key-list {
         list-style: none;
