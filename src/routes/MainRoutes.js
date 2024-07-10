@@ -15,33 +15,36 @@ const MainRoutes = () => {
   const [companyNotFound, setCompanyNotFound] = useState(false)
   const [authenticate, setAuthenticate] = useState(false);
   const accessToken = localStorage.getItem('accessToken');
-  useEffect(()=>{
-    function handleAuthenticate(){
+  useEffect(() => {
+    function handleAuthenticate() {
       console.log(accessToken)
-      if(accessToken==="" || accessToken===null){
+      if (accessToken === "" || accessToken === null) {
         setAuthenticate(false)
         console.log(authenticate)
-      }else{
+      } else {
         setAuthenticate(true)
         console.log(authenticate)
       }
     }
     handleAuthenticate()
-  },[accessToken,authenticate])
+  }, [accessToken, authenticate])
   return (
     <BrowserRouter>
-      <NavBar companyNotFound={companyNotFound} setAuthenticate={setAuthenticate} authenticate={authenticate}/>
-        <Routes>
-          <Route path="/" element={authenticate ? <Navigate to="/home" /> : <LoginPage setAuthenticate={setAuthenticate}/>} />
-          <Route path="/seating" element={authenticate ? <Seating /> : <Navigate to="/" />} />
-          <Route path="/register" element={authenticate ? <LayoutRegister /> : <Navigate to="/" />} />
-          <Route path="/layoutform"  element={authenticate ? <LayoutForm /> : <Navigate to="/" />} />
-          <Route path="/allocation"  element={authenticate ? <Allocation /> : <Navigate to="/" />} />
-          <Route path="/allocationitem"  element={authenticate ? <SingleAllocation  /> : <Navigate to="/" />} />
-          <Route path="/operations"  element={authenticate ? <Operations /> : <Navigate to="/" />} />
-          <Route path="/home" element={authenticate ? <Home companyNotFound={companyNotFound} setCompanyNotFound={setCompanyNotFound} />: <Navigate to="/" />} />
-          <Route path="*" element={<PageNotFound />}/>
-        </Routes>
+      {
+        authenticate &&
+        <NavBar companyNotFound={companyNotFound} setAuthenticate={setAuthenticate} authenticate={authenticate} />
+      }
+      <Routes>
+        <Route path="/" element={authenticate ? <Navigate to="/home" /> : <LoginPage setAuthenticate={setAuthenticate} />} />
+        <Route path="/seating" element={authenticate ? <Seating /> : <Navigate to="/" />} />
+        <Route path="/register" element={authenticate ? <LayoutRegister /> : <Navigate to="/" />} />
+        <Route path="/layoutform" element={authenticate ? <LayoutForm /> : <Navigate to="/" />} />
+        <Route path="/allocation" element={authenticate ? <Allocation /> : <Navigate to="/" />} />
+        <Route path="/allocationitem" element={authenticate ? <SingleAllocation /> : <Navigate to="/" />} />
+        <Route path="/operations" element={authenticate ? <Operations /> : <Navigate to="/" />} />
+        <Route path="/home" element={authenticate ? <Home companyNotFound={companyNotFound} setCompanyNotFound={setCompanyNotFound} /> : <Navigate to="/" />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </BrowserRouter>
   );
 };
